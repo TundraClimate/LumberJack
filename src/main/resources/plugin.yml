@@ -1,0 +1,5 @@
+name: LumberJack
+version: '0.0.1'
+main: io.github.tundraclimate.tree.LumberJack
+api-version: 1.19
+depend: [ColdLib]

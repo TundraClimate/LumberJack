@@ -1,0 +1,37 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
+}
+
+group = 'io.github.tundraclimate'
+version = '0.0.1'
+
+def version = version
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven { url = 'https://jitpack.io' }
+}
+
+libsDirectory.set(file("./server/plugins"))
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:${spigot_version}-R0.1-SNAPSHOT"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    compileOnly "com.github.TundraClimate:ColdLib:${coldlib_version}"
+}
+
+shadowJar {
+    archiveBaseName.set(rootProject.name)
+    archiveClassifier.set('')
+    archiveVersion.set(version)
+}
+

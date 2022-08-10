@@ -1,0 +1,8 @@
+#default: [ENABLED|DISABLED]
+default: ENABLED
+break_leaf: true
+break_limit: 200
+break_only_upper: false
+collect_items: true
+on_shift: ""
+auto_supply: true
