@@ -4,19 +4,25 @@ import io.github.tundraclimate.coldlib.ColdLib
 import org.bukkit.configuration.file.FileConfiguration
 
 class LJConfig {
-    init {
-        saveDefaultConfig()
-    }
     private val plugin = ColdLib.plugin
     private val conf: FileConfiguration = plugin.config
 
-    private fun saveDefaultConfig() = plugin.saveDefaultConfig()
+    fun isDefaultEnable() = conf.getBoolean("default_enable", true)
 
-    fun isBreakLeaf() = conf.getBoolean("break_leaf")
+    fun isBreakLeaf() = conf.getBoolean("break_leaf", true)
 
-    fun getBreakLimit() = conf.getInt("break_limit")
+    fun getBreakLimit() = conf.getInt("break_limit", 200)
 
-    fun isBreakUpper() = conf.getBoolean("break_only_upper")
+    fun isBreakUpper() = conf.getBoolean("break_only_upper", false)
 
-    fun isCollectItems() = conf.getBoolean("collect_items")
+    fun isCollectItems() = conf.getBoolean("collect_items", true)
+
+    fun isAutoSupply() = conf.getBoolean("auto_supply", true)
+
+    fun getOnShift(): List<ShiftAction> =
+        conf.getList("on_shift", emptyList<String>())?.filterIsInstance<String>()?.mapNotNull {
+            runCatching {
+                ShiftAction.valueOf(it)
+            }.getOrNull()
+        }.let { it ?: emptyList() }
 }

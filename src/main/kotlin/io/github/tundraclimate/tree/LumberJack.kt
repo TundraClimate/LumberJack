@@ -12,5 +12,11 @@ class LumberJack : JavaPlugin() {
     override fun onEnable() {
         ColdLib.plugin = this
         conf = LJConfig()
+        init()
+    }
+
+    private fun init() {
+        OnBreakLog.register()
+        saveDefaultConfig()
     }
 }
